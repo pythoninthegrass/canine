@@ -21,17 +21,17 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - "${PORT:-3000}:${PORT:-3000}"
+      - "${PORT:-3456}:${PORT:-3456}"
       - "3200:3200"
     environment:
       - DATABASE_URL=postgres://postgres:password@postgres:5432
-      - PORT=${PORT:-3000}
+      - PORT=${PORT:-3456}
       - CANINE_USERNAME=${CANINE_USERNAME}
       - CANINE_PASSWORD=${CANINE_PASSWORD}
       - BOOT_MODE=local
       # This docker file is only expected to be used in the laptop deployment, so we can hardcode the secret key base
       - SECRET_KEY_BASE=a38fcb39d60f9d146d2a0053a25024b9
-      - APP_HOST=http://localhost:${PORT:-3000}
+      - APP_HOST=http://localhost:${PORT:-3456}
     volumes:
       - ${DOCKER_SOCKET:-/var/run/docker.sock}:/var/run/docker.sock
 
@@ -49,7 +49,7 @@ services:
       - LOCAL_MODE=true
       - BOOT_MODE=local
       - SECRET_KEY_BASE=a38fcb39d60f9d146d2a0053a25024b9
-      - APP_HOST=http://localhost:${PORT:-3000}
+      - APP_HOST=http://localhost:${PORT:-3456}
     volumes:
       - ${DOCKER_SOCKET:-/var/run/docker.sock}:/var/run/docker.sock
 
