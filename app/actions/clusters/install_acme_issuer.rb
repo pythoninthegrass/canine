@@ -17,7 +17,7 @@ class Clusters::InstallAcmeIssuer
 
       kubectl.with_kube_config do |kubeconfig_file|
         begin
-          runner.(command, envs: { "KUBECONFIG" => kubeconfig_file.path, "NAMESPACE" => Clusters::Install::DEFAULT_NAMESPACE })
+          Cli::RunAndReturnOutput.new.call(command, envs: { "KUBECONFIG" => kubeconfig_file.path, "NAMESPACE" => Clusters::Install::DEFAULT_NAMESPACE })
           cluster.success("Cert-manager installed successfully")
         rescue Cli::CommandFailedError => e
           cluster.failed!
